@@ -17,27 +17,29 @@ public class ConexaoDatabase {
 
     private final String HOST = "localhost";
     private final String PORTA = "3306";
-    private final String BASE_DADOS = "vendaMaterial";
+    private final String BASE_DADOS = "venda_material";
     private final String USUARIO = "root";
     private final String SENHA = "";
 
-    public Connection ConexaoDb() {
+    public Connection ConexaoDb() throws ClassNotFoundException {
         Connection con = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://" + 
-                    this.HOST + ":" + 
-                    this.PORTA + "/" + 
-                    this.BASE_DADOS + 
-                    "?useTimezone=true&serverTimezone=UTC&user=" + 
-                    this.USUARIO + 
-                    "&password=" + 
-                    this.SENHA;
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            String url = "jdbc:mysql://"
+                    + this.HOST + ":"
+                    + this.PORTA + "/"
+                    + this.BASE_DADOS
+                    + "?useTimezone=true&serverTimezone=UTC&user="
+                    + this.USUARIO
+                    + "&password="
+                    + this.SENHA;
             con = DriverManager.getConnection(url);
 
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e);
         }
+        System.out.println("Conexao:");
+        System.out.println(con);
         return con;
     }
 }
