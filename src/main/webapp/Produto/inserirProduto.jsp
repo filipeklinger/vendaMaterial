@@ -9,12 +9,18 @@
     </head>
     <body>
         <%
-            Produto prod = new Produto();
-            prod.setNome(request.getParameter("nome"));
-            prod.setValor(0.0);
-            
-            ProdutoDAO prodStorage = new ProdutoDAO();
-            prodStorage.cadastrar(prod);
+            try {
+                Produto prod = new Produto();
+                prod.setNome(request.getParameter("nome"));
+                prod.setValor(0.0);
+
+                ProdutoDAO prodStorage = new ProdutoDAO();
+                prodStorage.cadastrar(prod);
+                out.print("<h3>Produto '" + prod.getNome() + "' cadastrado com sucesso.</h3>");
+            } catch (Exception e) {
+                out.print("Ops ocorreu um erro ao Gravar!");
+            }
+
         %>
     </body>
 </html>

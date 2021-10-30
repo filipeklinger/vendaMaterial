@@ -38,8 +38,6 @@ public class ConexaoDatabase {
         } catch (SQLException e) {
             System.err.println(e);
         }
-        System.out.println("Conexao:");
-        System.out.println(con);
         return con;
     }
 }
