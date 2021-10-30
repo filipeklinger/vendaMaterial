@@ -13,3 +13,6 @@ uma tela de acesso ao sistema.
 5. Baixar o NetBeans 12
 6. Instalar o Netbeans
 7. Abrir o Projeto
+8. Rodar Script de Criação do Banco de dados
+
+Obs: o Projeto requer um banco de dados **MySql** em execução em sua maquina, foi utilizado o wamp para tal.
