@@ -1,1 +1,7 @@
-com\projeto\vendamaterial\DTO\Produto.class
+model\DAO\ProdutoDAO.class
+control\UsuarioServlet.class
+model\DAO\ConexaoDatabase.class
+model\DTO\Produto.class
+model\DTO\Usuario.class
+model\DAO\UsuarioDTO.class
+model\DTO\Material.class

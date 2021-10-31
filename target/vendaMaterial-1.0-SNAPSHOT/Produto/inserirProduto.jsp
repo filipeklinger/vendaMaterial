@@ -1,5 +1,5 @@
-<%@page import="com.projeto.vendamaterial.DAO.ProdutoDAO"%>
-<%@page import="com.projeto.vendamaterial.DTO.Produto"%>
+<%@page import="model.DAO.ProdutoDAO"%>
+<%@page import="model.DTO.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

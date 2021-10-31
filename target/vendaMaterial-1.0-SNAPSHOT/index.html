@@ -5,10 +5,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Login Aqui</h1>
-        <form action="LoginServlet" method="Post">
-            
+        <h1>Login</h1>
+        <form action="usuario/login.jsp" method="POST">
+            <label>Usuario</label>
+            <input type="text" name="usuario" />
+            <br>
+            <label>Senha</label>
+            <input type="text" name="senha" />
+            <br>
+            <br>
+            <button type="submit">Entrar</button>
         </form>
-        <a href="Produto/cadastro.html" >Cadastro de produtos</a>
+        <a href="usuario/cadastro.jsp" >Cadastre-se</a>
     </body>
 </html>
