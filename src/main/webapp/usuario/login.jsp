@@ -2,8 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>Login</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+        <!-- JavaScript -->
+        <!-- jQuery first,then Bootstrap JS -->
+        <script src="../bootstrap/js/jquery.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.js"></script>
     </head>
     <body>
         <%
@@ -23,6 +29,41 @@
                 session.setAttribute("msg", null);
             }
         %>
-        <h1>Login Handler</h1>
+        <h1>Login</h1>
+        <form class="form-horizontal" action="usuario/login.jsp" method="POST">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Login</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="usuario">Usuário</label>  
+                    <div class="col-md-4">
+                        <input id="usuario" name="usuario" type="text" placeholder="usuario" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="senha">Senha</label>
+                    <div class="col-md-4">
+                        <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="entrar"></label>
+                    <div class="col-md-4">
+                        <button type="submit" id="entrar" name="entrar" class="btn btn-primary">Entrar</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+        <a href="usuario/cadastro.jsp" >Cadastre-se</a>
     </body>
 </html>

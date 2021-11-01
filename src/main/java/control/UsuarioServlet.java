@@ -102,12 +102,12 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("msg", msg);
 
-//        if (cadastrado) {
-//            response.sendRedirect("/usuario/login.jsp");
-//        } else {
-//            response.sendRedirect("/usuario/cadastro.jsp");
-//        }
-        processRequest(request, response);
+        if (cadastrado) {
+            response.sendRedirect("usuario/login.jsp");
+        } else {
+            response.sendRedirect("usuario/cadastro.jsp");
+        }
+//        processRequest(request, response);
     }
 
     /**
