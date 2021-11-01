@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.DAO.UsuarioDTO;
+import model.DAO.UsuarioDAO;
 import model.DTO.Usuario;
 
 /**
@@ -87,7 +87,7 @@ public class UsuarioServlet extends HttpServlet {
 
         boolean cadastrado = false;
         try {
-            UsuarioDTO uStorage = new UsuarioDTO();
+            UsuarioDAO uStorage = new UsuarioDAO();
             cadastrado = uStorage.cadastrar(usuario);
         } catch (Exception ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,7 +103,7 @@ public class UsuarioServlet extends HttpServlet {
         session.setAttribute("msg", msg);
 
         if (cadastrado) {
-            response.sendRedirect("usuario/login.jsp");
+            response.sendRedirect("../login.jsp");
         } else {
             response.sendRedirect("usuario/cadastro.jsp");
         }

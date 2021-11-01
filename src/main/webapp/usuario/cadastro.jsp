@@ -4,6 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Cadastre-se</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+        <!-- JavaScript -->
+        <!-- jQuery first,then Bootstrap JS -->
+        <script src="../bootstrap/js/jquery.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.js"></script>
     </head>
     <body>
         <%
@@ -23,19 +29,54 @@
                 session.setAttribute("msg", null);
             }
         %>
-        <h1>Cadastre-se</h1>
-        <form action="../UsuarioServlet" method="POST">
-            <label>Nome</label>
-            <input type="text" name="nome" />
-            <br>
-            <label>Usuario</label>
-            <input type="text" name="usuario" />
-            <br>
-            <label>Senha</label>
-            <input type="text" name="senha" />
-            <br>
-            <br>
-            <button type="submit">Cadastrar</button>
-        </form>
+        
+        <div class="container" style="padding-top: 48px;">
+            <a href="../" > <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar </a>
+            <form class="form-horizontal" action="../UsuarioServlet" method="POST" style="padding-top: 16px;">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend>Cadastre-se</legend>
+                    
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="nome">Nome</label>  
+                        <div class="col-md-4">
+                            <input id="nome" name="nome" type="text" placeholder="nome" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="usuario">Usuário</label>  
+                        <div class="col-md-4">
+                            <input id="usuario" name="usuario" type="text" placeholder="usuario" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Password input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="senha">Senha</label>
+                        <div class="col-md-4">
+                            <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="">
+
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="entrar"></label>
+                        <div class="col-md-4">
+                            <button type="submit" id="entrar" name="entrar" class="btn btn-primary btn-block">Cadastrar</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+            
+
+        </div>
     </body>
 </html>
