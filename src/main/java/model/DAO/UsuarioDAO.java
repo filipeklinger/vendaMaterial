@@ -36,21 +36,23 @@ public class UsuarioDAO {
 
     public Usuario Login(Usuario usuario) {
         Usuario u = new Usuario();
-        String sql = "SELECT FROM usuarios nome,username,senha WHERE usermane = ?";
+        String sql = "SELECT * FROM usuarios WHERE username = ?";
         try {
             pstm = con.prepareStatement(sql);
             pstm.setString(1, usuario.getUsername());
 
-            rs = pstm.executeQuery(sql);
-            pstm.close();
+            rs = pstm.executeQuery();
+            
             while (rs.next()) {
                 u.setNome(rs.getString("nome"));
                 u.setUsername(rs.getString("username"));
                 u.setSenha(rs.getString("senha"));
             }
+            pstm.close();
         } catch (SQLException e) {
+            System.out.println("==============Erro na Consulta ==========");
             System.err.println(e);
-            System.out.println(usuario);
+            System.out.println("Username buscado: "+usuario.getUsername());
         }
         return u;
     }

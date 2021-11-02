@@ -24,7 +24,7 @@ public class ConexaoDatabase {
     public Connection ConexaoDb() throws ClassNotFoundException {
         Connection con = null;
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://"
                     + this.HOST + ":"
                     + this.PORTA + "/"

@@ -61,7 +61,13 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        if (request.getParameter("logout") != null) {
+            HttpSession session = request.getSession();
+            session.invalidate();
+            response.sendRedirect("./");
+            return; // <--- Here.
+        }
     }
 
     /**
@@ -86,12 +92,14 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception ex) {
             Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        HttpSession session = request.getSession();
 
         if (usuario.getUsername().equals(cadastrado.getUsername())
-                && usuario.getSenha().equals(usuario.getSenha())) {
-            response.sendRedirect("/menu");
+                && usuario.getSenha().equals(cadastrado.getSenha())) {
+            session.setAttribute("usuario", cadastrado.getNome());
+            response.sendRedirect("./menu");
         } else {
-            HttpSession session = request.getSession();
+
             session.setAttribute("msg", "Login ou senha incorretos");
             System.out.println("==========================================");
             System.out.println(cadastrado.getNome());

@@ -31,7 +31,7 @@
         %>
         <h1 class="text-center">Sistema - Venda de Material</h1>
         <div class="container" style="padding-top: 64px;">
-            <form class="form-horizontal" action="usuario/login.jsp" method="POST">
+            <form class="form-horizontal" action="LoginServlet" method="POST">
                 <fieldset>
 
                     <!-- Form Name -->
