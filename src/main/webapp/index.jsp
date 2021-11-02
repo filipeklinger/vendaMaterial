@@ -12,25 +12,25 @@
         <script src="./bootstrap/js/bootstrap.js"></script>
     </head>
     <body>
-        <%
-            String msg = (String) session.getAttribute("msg");
-            if (!(msg == null)) {
-                if (msg.contains("sucesso")) {
-                    out.print("<div class='alert alert-success alert-dismissible' role='alert'>");
-                    out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
-                    out.print("<strong> " + msg + " </strong>");
-                    out.print("</div>");
-                } else {
-                    out.print("<div class='alert alert-danger alert-dismissible' role='alert'>");
-                    out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
-                    out.print("<strong> " + msg + " </strong>");
-                    out.print("</div>");
-                }
-                session.setAttribute("msg", null);
-            }
-        %>
         <h1 class="text-center">Sistema - Venda de Material</h1>
         <div class="container" style="padding-top: 64px;">
+            <%
+                String msg = (String) session.getAttribute("msg");
+                if (!(msg == null)) {
+                    if (msg.contains("sucesso")) {
+                        out.print("<div class='alert alert-success alert-dismissible' role='alert'>");
+                        out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.print("<strong> " + msg + " </strong>");
+                        out.print("</div>");
+                    } else {
+                        out.print("<div class='alert alert-danger alert-dismissible' role='alert'>");
+                        out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                        out.print("<strong> " + msg + " </strong>");
+                        out.print("</div>");
+                    }
+                    session.setAttribute("msg", null);
+                }
+            %>
             <form class="form-horizontal" action="LoginServlet" method="POST">
                 <fieldset>
 
@@ -67,7 +67,7 @@
 
                 </fieldset>
             </form>
-            
+
 
         </div>
     </body>

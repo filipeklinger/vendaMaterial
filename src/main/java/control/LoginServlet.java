@@ -106,7 +106,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println(cadastrado.getUsername());
             System.out.println(cadastrado.getSenha());
             System.out.println("==========================================");
-            response.sendRedirect("../");
+            response.sendRedirect("./");
         }
     }
 

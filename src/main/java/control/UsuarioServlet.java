@@ -103,7 +103,7 @@ public class UsuarioServlet extends HttpServlet {
         session.setAttribute("msg", msg);
 
         if (cadastrado) {
-            response.sendRedirect("../login.jsp");
+            response.sendRedirect("./");
         } else {
             response.sendRedirect("usuario/cadastro.jsp");
         }
