@@ -14,7 +14,7 @@ public class ProdutoDAO {
         con = new ConexaoDatabase().ConexaoDb();
     }
 
-    public void cadastrar(Produto produto) {
+    public boolean cadastrar(Produto produto) {
         String sql = "INSERT INTO produto (nome,valor) VALUES (?,?)";
         try {
             pstm = con.prepareStatement(sql);
@@ -23,8 +23,10 @@ public class ProdutoDAO {
 
             pstm.execute();
             pstm.close();
+            return true;
         } catch (SQLException e) {
             System.err.println(e);
         }
+        return false;
     }
 }
