@@ -1,10 +1,17 @@
 package model.DTO;
 
-
 public class Produto {
+
     private int id;
     private String nome;
     private double valor;
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
 
     /**
      * @return the id
