@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.DAO.ProdutoDAO;
-import model.DAO.UsuarioDAO;
 import model.DTO.Produto;
-import model.DTO.Usuario;
 
 /**
  *
@@ -42,13 +40,36 @@ public class ProdutoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ProdutoServlet</title>");            
+            out.println("<title>Servlet ProdutoServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ProdutoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
+    }
+
+    protected void processDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        boolean deletado = false;
+        
+
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            ProdutoDAO pStorage = new ProdutoDAO();
+            deletado = pStorage.deleteProduto(id);
+        } catch (Exception e) {
+            System.err.println(e.getCause());
+            System.err.println(e.getMessage());
+        }
+
+        HttpSession session = request.getSession();
+        if (deletado) {
+            session.setAttribute("msg", "deletado com sucesso");
+        } else {
+            session.setAttribute("msg", "erro ao deletar");
+        }
+        response.sendRedirect("./produto");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +84,13 @@ public class ProdutoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String action = request.getParameter("action");
+        if (action != null && action.equals("delete")) {
+            processDelete(request, response);
+        }else{
+            processRequest(request, response);
+        }
+
     }
 
     /**
@@ -79,7 +106,7 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
 
-     Produto produto = new Produto();
+        Produto produto = new Produto();
         produto.setNome(request.getParameter("nome"));
         produto.setValor(Double.parseDouble(request.getParameter("valor")));
 
@@ -105,6 +132,16 @@ public class ProdutoServlet extends HttpServlet {
         } else {
             response.sendRedirect("./produto/cadastro.jsp");
         }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

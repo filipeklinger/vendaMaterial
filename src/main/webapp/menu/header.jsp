@@ -1,3 +1,7 @@
+<%
+    String usuario = (String) session.getAttribute("usuario");
+    if(usuario == null) response.sendRedirect("../LoginServlet?logout=true");
+%>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -33,20 +37,22 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<%
-    String msg = (String) session.getAttribute("msg");
-    if (!(msg == null)) {
-        if (msg.contains("sucesso")) {
-            out.print("<div class='alert alert-success alert-dismissible' role='alert'>");
-            out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
-            out.print("<strong> " + msg + " </strong>");
-            out.print("</div>");
-        } else {
-            out.print("<div class='alert alert-danger alert-dismissible' role='alert'>");
-            out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
-            out.print("<strong> " + msg + " </strong>");
-            out.print("</div>");
+<div class="container">
+    <%
+        String msg = (String) session.getAttribute("msg");
+        if (!(msg == null)) {
+            if (msg.contains("sucesso")) {
+                out.print("<div class='alert alert-success alert-dismissible' role='alert'>");
+                out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                out.print("<strong> " + msg + " </strong>");
+                out.print("</div>");
+            } else {
+                out.print("<div class='alert alert-danger alert-dismissible' role='alert'>");
+                out.print("<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>");
+                out.print("<strong> " + msg + " </strong>");
+                out.print("</div>");
+            }
+            session.setAttribute("msg", null);
         }
-        session.setAttribute("msg", null);
-    }
-%>
+    %>
+</div>

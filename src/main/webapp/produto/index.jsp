@@ -42,8 +42,8 @@
                                 out.println("<td>" + p.getNome() + "</td>");
                                 out.println("<td>R$ " + p.getValor() + "</td>");
                                 out.println("<td class='text-center'> "
-                                        + "<a class='btn btn-info btn-xs' href='#'><span class='glyphicon glyphicon-edit'></span> Editar</a> "
-                                        + "<a href='#' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Remover</a> "
+                                        + "<a class='btn btn-info btn-xs' href='./editarProduto.jsp?id="+p.getId()+"'><span class='glyphicon glyphicon-edit'></span> Editar</a> "
+                                        + "<a href='./excluirProduto.jsp?id="+p.getId()+"&nome="+p.getNome()+"' class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-remove'></span> Remover</a> "
                                         + "</td>");
                                 out.println("</tr>");
                             }

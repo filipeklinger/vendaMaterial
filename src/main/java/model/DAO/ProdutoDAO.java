@@ -28,7 +28,7 @@ public class ProdutoDAO {
             pstm.close();
             return true;
         } catch (SQLException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return false;
     }
@@ -48,8 +48,43 @@ public class ProdutoDAO {
             }
             pstm.close();
         } catch (SQLException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return produtoList;
+    }
+    
+    public Produto getProduto(int id){
+        Produto p = new Produto();
+        String sql = "SELECT * FROM produto WHERE id = ? LIMIT 1";
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, id);
+            
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                p.setId(rs.getInt("id"));
+                p.setNome(rs.getString("nome"));
+                p.setValor(rs.getDouble("valor"));
+            }
+            pstm.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return p;
+    }
+    
+    public boolean deleteProduto(int id){
+        String sql = "DELETE FROM produto WHERE id = ?";
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, id);
+            
+            pstm.execute();
+            pstm.close();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
     }
 }
