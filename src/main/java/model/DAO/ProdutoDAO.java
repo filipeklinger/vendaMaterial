@@ -87,4 +87,21 @@ public class ProdutoDAO {
         }
         return false;
     }
+    
+    public boolean atualizar(Produto produto) {
+        String sql = "UPDATE produto SET nome=?,valor=? WHERE id=?";
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, produto.getNome());
+            pstm.setDouble(2, produto.getValor());
+            pstm.setInt(3, produto.getId());
+
+            pstm.execute();
+            pstm.close();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
 }

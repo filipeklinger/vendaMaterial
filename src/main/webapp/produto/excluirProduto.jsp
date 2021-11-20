@@ -1,3 +1,4 @@
+<%@page import="model.DTO.Produto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -52,7 +52,6 @@ public class ProdutoServlet extends HttpServlet {
     protected void processDelete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         boolean deletado = false;
-        
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
@@ -87,25 +86,14 @@ public class ProdutoServlet extends HttpServlet {
         String action = request.getParameter("action");
         if (action != null && action.equals("delete")) {
             processDelete(request, response);
-        }else{
+        } else {
             processRequest(request, response);
         }
 
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-
         Produto produto = new Produto();
         produto.setNome(request.getParameter("nome"));
         produto.setValor(Double.parseDouble(request.getParameter("valor")));
@@ -134,14 +122,51 @@ public class ProdutoServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+    protected void processUpdate(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Produto produto = new Produto();
+        produto.setId(Integer.parseInt(request.getParameter("id")));
+        produto.setNome(request.getParameter("nome"));
+        produto.setValor(Double.parseDouble(request.getParameter("valor")));
 
+        boolean atualizado = false;
+        try {
+            ProdutoDAO pStorage = new ProdutoDAO();
+            atualizado = pStorage.atualizar(produto);
+        } catch (Exception ex) {
+            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String msg = "";
+        if (atualizado) {
+            msg = "Atualizado com sucesso";
+        } else {
+            msg = "Erro ao atualizar";
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute("msg", msg);
+
+        response.sendRedirect("./produto");
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+        if (action != null && action.equals("update")) {
+            processUpdate(request, response);
+        } else {
+            processCadastro(request, response);
+        }
+
     }
 
     /**
