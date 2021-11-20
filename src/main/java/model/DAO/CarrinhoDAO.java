@@ -41,6 +41,23 @@ public class CarrinhoDAO {
         }
         return carrinho;
     }
+    
+    public boolean atualizarProdutoCarrinho(ProdutoCarrinho pc){
+        String sql = "UPDATE produto_carrinho SET quantidade=? WHERE id=?";
+        try {
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, pc.getQuantidade());
+            pstm.setInt(2, pc.getId());
+
+            pstm.execute();
+            pstm.close();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+            Logger.getLogger(CarrinhoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
     public boolean adicionarProduto(ProdutoCarrinho pc) {
         String sql = "INSERT INTO produto_carrinho (carrinho_id,produto_id,quantidade) VALUES (?,?,?)";
@@ -62,7 +79,7 @@ public class CarrinhoDAO {
 
     public ArrayList<ProdutoCarrinho> getProduto(int carrinhoId) {
         ArrayList<ProdutoCarrinho> produtoList = new ArrayList();
-        String sql = "SELECT p.*,pc.quantidade FROM produto p INNER JOIN produto_carrinho pc ON pc.produto_id = p.id WHERE pc.carrinho_id = ? ORDER BY p.nome ASC";
+        String sql = "SELECT p.*,pc.quantidade,pc.id AS prod_car_id FROM produto p INNER JOIN produto_carrinho pc ON pc.produto_id = p.id WHERE pc.carrinho_id = ? ORDER BY p.nome ASC";
         try {
             pstm = con.prepareStatement(sql);
             pstm.setInt(1, carrinhoId);
@@ -73,6 +90,7 @@ public class CarrinhoDAO {
                 p.setNome(rs.getString("nome"));
                 p.setValor(rs.getDouble("valor"));
                 ProdutoCarrinho pc = new ProdutoCarrinho(p, rs.getInt("quantidade"), carrinhoId);
+                pc.setId(rs.getInt("prod_car_id"));
                 produtoList.add(pc);
             }
             pstm.close();

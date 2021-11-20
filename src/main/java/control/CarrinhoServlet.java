@@ -89,7 +89,7 @@ public class CarrinhoServlet extends HttpServlet {
             if (c.getId() > 0) {
                 //criado 
                 session.setAttribute("carrinho_id", c.getId());
-                response.sendRedirect("./venda/produtos.jsp");
+                response.sendRedirect("./venda/produtos.jsp?carrinho="+c.getId());
             } else {
                 //erro
                 session.setAttribute("msg", "Erro ao criar novo carrinho");
@@ -112,6 +112,7 @@ public class CarrinhoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
+            String pcIdParam = request.getParameter("pc_id");
             int carrinhoId = Integer.parseInt(request.getParameter("carrinho_id"));
             int produtoId = Integer.parseInt(request.getParameter("produto_id"));
             int quantidade = Integer.parseInt(request.getParameter("quantidade"));
@@ -120,14 +121,24 @@ public class CarrinhoServlet extends HttpServlet {
             ProdutoCarrinho pc = new ProdutoCarrinho(produtoId,quantidade, carrinhoId);
             
             CarrinhoDAO cStorage = new CarrinhoDAO();
-            boolean criado = cStorage.adicionarProduto(pc);
+            boolean criado;
+            String msg = "";
+            if(pcIdParam != null && Integer.parseInt(pcIdParam) > 0){
+                pc.setId(Integer.parseInt(pcIdParam));
+                criado = cStorage.atualizarProdutoCarrinho(pc);
+                msg = pc.getQuantidade() >0? " atualizado" : " removido";
+            }
+            else{
+                criado = cStorage.adicionarProduto(pc);
+                msg = " adicionado";
+            }
             HttpSession session = request.getSession();
             if (criado) {
-                session.setAttribute("msg", produto+" adicionado com sucesso.");
+                session.setAttribute("msg", produto+msg+" com sucesso.");
             } else {
                 session.setAttribute("msg", "Erro ao adicionar "+produto);
             }
-            response.sendRedirect("./venda/produtos.jsp");
+            response.sendRedirect("./venda/produtos.jsp?carrinho="+carrinhoId);
         } catch (Exception ex) {
             System.out.println(ex.getCause());
             System.out.println(ex.getMessage());

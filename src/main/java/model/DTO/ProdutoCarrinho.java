@@ -12,6 +12,7 @@ import java.util.Objects;
  * @author Filipe
  */
 public class ProdutoCarrinho {
+    private int id;
     private int carrinhoId;
     private Produto produto;
     private int quantidade;
@@ -95,6 +96,20 @@ public class ProdutoCarrinho {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
     

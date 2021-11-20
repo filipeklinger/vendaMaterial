@@ -33,8 +33,8 @@
                             <th class="text-center">Ação</th>
                         </tr>
                     </thead>
-                    <%                        
-                        int carrinhoId = (int) session.getAttribute("carrinho_id");
+                    <%
+                        int carrinhoId = Integer.parseInt(request.getParameter("carrinho"));
                         try {
                             CarrinhoDAO cStorage = new CarrinhoDAO();
                             ArrayList<ProdutoCarrinho> pcLista = cStorage.getProduto(carrinhoId);
@@ -50,7 +50,6 @@
                                     }
                                 }
                                 out.println("<tr>");
-                                //out.println("<td>" + p.getId() + "</td>");
                                 out.println("<td>" + p.getNome() + "</td>");
                                 out.println("<td>R$ " + p.getValor() + "</td>");
                                 out.println("<td class='text-center'> "
@@ -59,7 +58,9 @@
                                         + "<input type='hidden' name='carrinho_id' value='" + carrinhoId + "'  />"
                                         + "<input type='hidden' name='produto_id' value='" + p.getId() + "'  />"
                                         + "<input type='hidden' name='produto' value='" + p.getNome()+ "'  />"
+                                        + "<input type='hidden' name='pc_id' value='" + pc.getId()+ "'  />"
                                         + "<input type='number' name='quantidade' placeholder='QTD' value='"+pc.getQuantidade()+"' />"
+                                                + "</td>"+ "<td>"
                                         + "<button type='submit' class='btn btn-info btn-xs' ><span class='glyphicon glyphicon-plus'></span> Adicionar</button> "
                                         + " "
                                         + "</form>"
