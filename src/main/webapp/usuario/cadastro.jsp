@@ -31,7 +31,7 @@
                     session.setAttribute("msg", null);
                 }
             %>
-            <form class="form-horizontal" action="../ProdutoServlet" method="POST" style="padding-top: 16px;">
+            <form class="form-horizontal" action="../UsuarioServlet" method="POST" style="padding-top: 16px;">
                 <fieldset>
 
                     <!-- Form Name -->

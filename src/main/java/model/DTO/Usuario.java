@@ -2,6 +2,7 @@ package model.DTO;
 
 
 public class Usuario {
+    private int id;
     private String nome;
     private String username;
     private String senha;
@@ -50,6 +51,20 @@ public class Usuario {
      */
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
     
 }

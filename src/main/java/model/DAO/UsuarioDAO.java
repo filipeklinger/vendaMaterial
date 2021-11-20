@@ -17,6 +17,7 @@ public class UsuarioDAO {
     }
 
     public boolean cadastrar(Usuario usuario) {
+        //TODO verificar se username já existe antes de inserir
         String sql = "INSERT INTO usuarios (nome,username,senha) VALUES (?,?,?)";
         try {
             pstm = con.prepareStatement(sql);
@@ -44,6 +45,7 @@ public class UsuarioDAO {
             rs = pstm.executeQuery();
             
             while (rs.next()) {
+                u.setId(rs.getInt("id"));
                 u.setNome(rs.getString("nome"));
                 u.setUsername(rs.getString("username"));
                 u.setSenha(rs.getString("senha"));
@@ -51,7 +53,7 @@ public class UsuarioDAO {
             pstm.close();
         } catch (SQLException e) {
             System.out.println("==============Erro na Consulta ==========");
-            System.err.println(e);
+            System.err.println(e.getMessage());
             System.out.println("Username buscado: "+usuario.getUsername());
         }
         return u;

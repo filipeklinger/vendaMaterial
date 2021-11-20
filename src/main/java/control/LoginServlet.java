@@ -48,8 +48,6 @@ public class LoginServlet extends HttpServlet {
             out.println("</html>");
         }
     }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -61,7 +59,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         if (request.getParameter("logout") != null) {
             HttpSession session = request.getSession();
             session.invalidate();
@@ -97,6 +94,7 @@ public class LoginServlet extends HttpServlet {
         if (usuario.getUsername().equals(cadastrado.getUsername())
                 && usuario.getSenha().equals(cadastrado.getSenha())) {
             session.setAttribute("usuario", cadastrado.getNome());
+            session.setAttribute("usuario_id", cadastrado.getId());
             response.sendRedirect("./menu");
         } else {
 

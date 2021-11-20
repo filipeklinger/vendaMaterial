@@ -7,25 +7,17 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import model.DAO.UsuarioDAO;
-import model.DTO.Usuario;
 import model.DTO.Venda;
 
 /**
  *
  * @author Filipe
  */
-public class UsuarioServlet extends HttpServlet {
-
-    private String msgValidade = "";
+public class VendaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,15 +36,14 @@ public class UsuarioServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UsuarioServlet</title>");
+            out.println("<title>Servlet VendaServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UsuarioServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet VendaServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -67,6 +58,24 @@ public class UsuarioServlet extends HttpServlet {
         processRequest(request, response);
     }
 
+    protected void iniciaVenda(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            Venda v;
+            String nome = request.getParameter("nome");
+            if (nome != null) {
+                v = new Venda(nome);
+            } else {
+                v = new Venda();
+            }
+            
+            
+        } catch (Exception e) {
+        }
+
+    }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -78,36 +87,11 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-
-        Usuario usuario = new Usuario();
-        usuario.setNome(request.getParameter("nome"));
-        usuario.setUsername(request.getParameter("usuario"));
-        usuario.setSenha(request.getParameter("senha"));
-
-        boolean cadastrado = false;
-        try {
-            UsuarioDAO uStorage = new UsuarioDAO();
-            cadastrado = uStorage.cadastrar(usuario);
-        } catch (Exception ex) {
-            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        String action = request.getParameter("action");
+        if (action != null && action.equals("iniciar")) {
+            iniciaVenda(request, response);
         }
 
-        String msg = "";
-        if (cadastrado) {
-            msg = "Cadastrado com sucesso";
-        } else {
-            msg = "Erro ao cadastrar";
-        }
-        HttpSession session = request.getSession();
-        session.setAttribute("msg", msg);
-
-        if (cadastrado) {
-            response.sendRedirect("./");
-        } else {
-            response.sendRedirect("usuario/cadastro.jsp");
-        }
-//        processRequest(request, response);
     }
 
     /**
@@ -119,9 +103,5 @@ public class UsuarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private boolean Validate() {
-        return false;
-    }
 
 }
