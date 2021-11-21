@@ -58,7 +58,7 @@ public class VendaServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void iniciaVenda(HttpServletRequest request, HttpServletResponse response)
+    protected void criaVenda(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
@@ -88,8 +88,8 @@ public class VendaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action != null && action.equals("iniciar")) {
-            iniciaVenda(request, response);
+        if (action != null && action.equals("criar")) {
+            criaVenda(request, response);
         }
 
     }

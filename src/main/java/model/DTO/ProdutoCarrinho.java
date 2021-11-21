@@ -111,6 +111,13 @@ public class ProdutoCarrinho {
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * @return the subTotal
+     */
+    public double getSubTotal() {
+        return produto.getValor()*quantidade;
+    }
     
     
     
