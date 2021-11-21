@@ -20,9 +20,19 @@ public class ConexaoDatabase {
     private final String BASE_DADOS = "venda_material";
     private final String USUARIO = "root";
     private final String SENHA = "";
+    private static Connection connection;
 
-    public Connection ConexaoDb() throws ClassNotFoundException {
-        Connection con = null;
+    public Connection getConexao() throws ClassNotFoundException {
+        if (connection != null) {
+            return connection;
+        } else {
+            makeConnection();
+            return connection;
+        }
+    }
+
+    //singleton para não criar varias instancias durante execucao da aplicacao
+    private void makeConnection() throws ClassNotFoundException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             String url = "jdbc:mysql://"
@@ -33,11 +43,10 @@ public class ConexaoDatabase {
                     + this.USUARIO
                     + "&password="
                     + this.SENHA;
-            con = DriverManager.getConnection(url);
+            connection = DriverManager.getConnection(url);
 
         } catch (SQLException e) {
             System.err.println(e);
         }
-        return con;
     }
 }

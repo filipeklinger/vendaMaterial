@@ -80,15 +80,17 @@
                 %>
 
                 <form class="form-horizontal" action="../VendaServlet" method="POST" style="padding-top: 16px;">
+                    <input type="hidden" name="total" value="<%=total%>">
+                    <input type="hidden" name="carrinho" value="<%=carrinhoId%>">
                     <fieldset>
                         <!-- Select Basic -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="pagamento">Forma Pagamento</label>
                             <div class="col-md-4">
                                 <select id="pagamento" name="pagamento" class="form-control">
-                                    <option value="1">Dinheiro</option>
-                                    <option value="2">Cartão Crédito</option>
-                                    <option value="3">Cartão Débito</option>
+                                    <option value="dinheiro">Dinheiro</option>
+                                    <option value="cartao credito">Cartão Crédito</option>
+                                    <option value="cartao debito">Cartão Débito</option>
                                 </select>
                             </div>
                         </div>

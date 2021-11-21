@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.DAO.VendaDAO;
 import model.DTO.Venda;
 
 /**
@@ -44,6 +46,7 @@ public class VendaServlet extends HttpServlet {
             out.println("</html>");
         }
     }
+
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -58,24 +61,6 @@ public class VendaServlet extends HttpServlet {
         processRequest(request, response);
     }
 
-    protected void criaVenda(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try {
-            Venda v;
-            String nome = request.getParameter("nome");
-            if (nome != null) {
-                v = new Venda(nome);
-            } else {
-                v = new Venda();
-            }
-            
-            
-        } catch (Exception e) {
-        }
-
-    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -87,9 +72,32 @@ public class VendaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        if (action != null && action.equals("criar")) {
-            criaVenda(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            double total = Double.parseDouble(request.getParameter("total"));
+            int carrinhoId = Integer.parseInt(request.getParameter("carrinho"));
+            String pagamento = request.getParameter("pagamento");
+            
+            boolean cadastrado = false;
+            Venda v = new Venda(carrinhoId, pagamento, total);
+            VendaDAO vStorage = new VendaDAO();
+            cadastrado = vStorage.cadastrar(v);
+            
+            String msg = "";
+            if(cadastrado){
+                msg = "Venda finalizada com sucesso";
+            }else{
+                msg="Erro ao finalizar venda";
+            }
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("msg", msg);
+            response.sendRedirect("./menu");
+            
+        } catch (Exception e) {
+            out.println("<h2>Erro ao processar venda</h2>");
+            out.println(e.getMessage());
         }
 
     }

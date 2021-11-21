@@ -14,7 +14,7 @@ public class ProdutoDAO {
     ResultSet rs;
 
     public ProdutoDAO() throws ClassNotFoundException {
-        con = new ConexaoDatabase().ConexaoDb();
+        con = new ConexaoDatabase().getConexao();
     }
 
     public boolean cadastrar(Produto produto) {

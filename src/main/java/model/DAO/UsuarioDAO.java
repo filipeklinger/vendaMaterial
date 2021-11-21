@@ -13,7 +13,7 @@ public class UsuarioDAO {
     ResultSet rs;
 
     public UsuarioDAO() throws ClassNotFoundException {
-        con = new ConexaoDatabase().ConexaoDb();
+        con = new ConexaoDatabase().getConexao();
     }
 
     public boolean cadastrar(Usuario usuario) {

@@ -19,7 +19,7 @@ public class CarrinhoDAO {
     ResultSet rs;
 
     public CarrinhoDAO() throws ClassNotFoundException {
-        con = new ConexaoDatabase().ConexaoDb();
+        con = new ConexaoDatabase().getConexao();
     }
 
     public Carrinho criar(Carrinho carrinho) {
